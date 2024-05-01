@@ -1,7 +1,7 @@
 # Full Stack LLD: React-1: Introduction to React: JSX, Props, lists
 
 ---
-title: Agenda of the lecture
+title: Agenda of the lecture  
 description: What will be covered in the topic?
 
 ---
@@ -9,6 +9,7 @@ description: What will be covered in the topic?
 ## Agenda
 
 We will try to cover most of these topics in today's sessions and the remaining in the next.
+
 * What is React & it's advantages
 * Setting up react using CDN links
 * components
@@ -22,38 +23,41 @@ It is going to be a bit challenging, advanced, but a  very interesting session c
 So let's start.
 
 ---
-title: Challenges in modern frontend
-description: Discussion of  challanges faced in the modern frontend in detail.
+title: Challenges in modern frontend  
+description: Discussion of challenges faced in the modern frontend in detail.
 
 ---
 
 ## Challenges in Modern Frontend
 
-**Asking Question**
-What are the Challenges faced in the modern frontend?
-**Ans:**
+**Asking Question:** 
+What are the Challenges faced in the modern frontend?    
+**Ans:**  
+
 * Code Maintainability
 * Single Page Application
 * Lot of functionalities
 
-**Lot of feature in our WebApp**
-- Hence the DOM manipulation is costly.
+### Lot of feature in our WebApp
 
-As we open linkedin we see a lot of functionalities such as shown below like home, mynetwork,jobs, messaging, me etc.
+* Hence the DOM manipulation is costly.
 
-![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/489/original/upload_a8b0bac0a165c827242385575fafe404.png?1699630915)
- 
-**Single Page Application (SPA)**
+As we open linkedin we see a lot of functionalities such as shown below like home, mynetwork, jobs, messaging, me etc.
+
+![Alt text](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/489/original/upload_a8b0bac0a165c827242385575fafe404.png?1699630915)
+
+### Single Page Application (SPA)
+
 * That does not reload even if the URL is changed
 * It is done by having single html file which utilizes the History API.
-*  the cross team communication, and hot reload. This done using the Create-React-App ad Vite.
+* the cross team communication, and hot reload. This is done using the Create-React-App and Vite.
 
-**Asking Question**
-**Q:** Then why there is so much name of react?
-**Ans:** We have tools like document API(least performant), where the react can effeciently help to do  the DOM manipulation.
+**Asking Question**  
+**Q:** Then why there is so much name of react?  
+**Ans:** We have tools like document API(least performant), where the react can efficiently help to do the DOM manipulation.
 
 ---
-title: What is React
+title: What is React  
 description: Discussion of react in detail.
 
 ---
@@ -74,7 +78,7 @@ description: Discussion of react in detail.
 Algorithm used is Reconciler that is why react is called as library.
 
 ---
-title: Hello World in react 
+title: Hello World in react  
 description: Discussion of basic application in react in detail.
 
 ---
@@ -140,7 +144,7 @@ As in the above function Hello which is returning something which is neither htm
 
 
 ---
-title: Bare bone React example 
+title: Bare bone React example  
 description: Discussion of basic application in react in detail.
 
 ---
@@ -169,7 +173,7 @@ If we take another example where without using JSX format to return the html unl
         function HELLO() {
             let name = "React";
             let age = 30
-            return `<h1>Hello  ${name} Thanks Babel and you are ${age<18 ?"underage":"eligble"}</h1>`;
+            return `<h1>Hello  ${name} Thanks Babel and you are ${age<18 ?"underage":"eligible"}</h1>`;
         }
 
 ReactDOM.render(HELLO, document.getElementById("root"));
@@ -204,7 +208,7 @@ ReactDOM.render(HELLO, document.getElementById("root"));
     <!-- the whole application lives inside-->
     <div id = "root"></div>
 
-    <!-- single Page applcation : JS -->
+    <!-- single Page application : JS -->
     <script type = "text/babel">
         // -> component : a function that returns HTML
         function HELLO(obj) {
@@ -213,7 +217,7 @@ ReactDOM.render(HELLO, document.getElementById("root"));
 
             return <h1>Hello {name} Thanks Babel :) is {age} old and works as {occupation} </h1>;
         }
-        // a method in REACTDOM -> puts the retruned HTML from componente in root element
+        // a method in REACTDOM -> puts the returned HTML from component in root element
         ReactDOM.render(<HELLO age = {35} occupation = {"mentor and SDE "}></HELLO>, document.getElementById("root"));
     </script>
 </body>
@@ -249,14 +253,15 @@ function react(component) {
 4. you create bigger components using smaller component
 
 ---
-title: JSX
+title: JSX  
 description: Discussion of basic detail about JSX.
 
 ---
 
 ## JSX
 
-JSON: Represent data in in JS fromat.
+JSON: Represent data in in JS format.
+
 ```javascript
 {
 name:Jasbir,
@@ -274,7 +279,7 @@ XML: Represent data in HTML
 In a typical web development workflow, JSX (a JavaScript extension used in libraries like React) is transformed into valid JavaScript, which is then utilized to render HTML elements. The resulting HTML can subsequently be converted into XML if needed for specific use cases or data interchange.
 
 ---
-title: Props
+title: Props  
 description: Discussion of basic detail about Props.
 
 ---
@@ -286,7 +291,7 @@ description: Discussion of basic detail about Props.
 ```javascript
 <script type = "text/babel">
         function HELLO(obj) {
-            let {age,occupation} = obj;
+            let {age, occupation} = obj;
             let name = "Jasbir";
 
             return <h1>Hello {name} Thanks Babel :) is {age} old and works as {occupation} </h1>;
@@ -294,10 +299,11 @@ description: Discussion of basic detail about Props.
         ReactDOM.render(<HELLO age = {35} occupation = {"mentor and SDE "}></HELLO>, document.getElementById("root"));
 </script>
 ```
+
 ![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/514/original/upload_3a5c83aa759fedde3fa4ddb2fa3ce43e.png?1699635530)
 
 ---
-title: Component Composition
+title: Component Composition  
 description: Discussion of basic details about the component composition in detail.
 
 ---
@@ -313,11 +319,11 @@ This code creates a single-page application using React and Babel. It defines tw
     <!-- the whole application lives inside-->
     <div id = "root"></div>
 
-    <!-- single Page applcation : JS -->
+    <!-- single Page application : JS -->
     <script type = "text/babel">
         // -> component : a function that returns HTML
         function HELLO(prop) {
-            let {name,age} = prop
+            let {name, age} = prop
             return <h1>Hello {name} Thanks Babel is {age} old </h1>;
         }
         function BYE(){
@@ -341,10 +347,10 @@ This code creates a single-page application using React and Babel. It defines tw
 
 ![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/515/original/upload_4c0071f1727e30cb02ea4e927d07de0c.png?1699635619)
 
+* Create -> parent component from children component  
+* Significance -> you can break a problem into multiple smaller parts  
+* A method in REACTDOM -> puts the returned HTML from component in root element  
 
-- Create -> parent component from children component 
-- Significance -> you can break a problem into multiple smaller parts
-- A method in REACTDOM -> puts the returned HTML from component in root element
 
 Like in the linkendin example shown below we can distribute the bigger block of info into smaller components like one for pic, for the three dots, for the information etc.
 
@@ -352,26 +358,26 @@ Like in the linkendin example shown below we can distribute the bigger block of 
 
 
 ---
-title: Rendering list from Data
+title: Rendering list from Data  
 description: Discussion of basic introduction of using the list in the react in detail.
 
 ---
 
 ## Rendering List from Data
 
-Intially the list items are fetched using the simple for loop from the list and gets rendered on the browser.
+Initially the list items are fetched using the simple for loop from the list and gets rendered on the browser.
 
 ```jsx
 <div id = "root"></div>
     <script type = "text/babel">
-        let statinoary = ["Pen", "Pencil", "Eraser", "Ruler"];
+        let stationary = ["Pen", "Pencil", "Eraser", "Ruler"];
         
         // console.log(liItemsArr)
         
         function List() {
             return<div>
                 <h2>List Items</h2>
-                <ul>{statinoary.map((item) => {
+                <ul>{stationary.map((item) => {
                     return <li>{item}</li>
                 })}</ul>
             </div>
@@ -383,10 +389,10 @@ Intially the list items are fetched using the simple for loop from the list and 
 
 ![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/517/original/upload_0b90af9c88d82aaa1b7535a2cb1650cd.png?1699635846)
 
-When you want to print a list it expects an array of string and that string code should be valid html, so when you map you get the valid html in the form of an array and then react internally spread that and then put it as li element.
+When you want to print a list, it expects an array of string and that string code should be valid html. So when you map, you get the valid html in the form of an array and then react internally spread that and then put it as li element.
 
 ---
-title: Key Prop
+title: Key Prop  
 description: Key Props help identify each item uniquely.
 
 ---
@@ -398,24 +404,24 @@ Do you see any mistake here?
 
 ![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/518/original/upload_93a7ee3cb2e710a3513898f5e5c65fb1.png?1699635897)
 
--> Every child in a list should have a key prop. A unique value for each list item.
--> A key ensures that none of the component is rendered multiple times. 
--> It also helps to identify each item uniquely.
--> Purpose of react is to optimize DOM.
--> Browser is very bad a doing DOM manipulation.
--> React makes it easier for the browser to manipulate DOM structure.
+-> Every child in a list should have a key prop. A unique value for each list item.  
+-> A key ensures that none of the component is rendered multiple times.  
+-> It also helps to identify each item uniquely.  
+-> Purpose of react is to optimize DOM.  
+-> Browser is very bad a doing DOM manipulation.  
+-> React makes it easier for the browser to manipulate DOM structure.  
 
 ```jsx
 <div id = "root"></div>
     <script type = "text/babel">
-        let statinoary = ["Pen", "Pencil", "Eraser", "Ruler"];
+        let stationary = ["Pen", "Pencil", "Eraser", "Ruler"];
         
         // console.log(liItemsArr)
         
         function List() {
             return<div>
                 <h2>List Items</h2>
-                <ul>{statinoary.map((item,idx) => {
+                <ul>{stationary.map((item,idx) => {
                     return <li key = {idx}>{item}</li>
                 })}</ul>
             </div>
