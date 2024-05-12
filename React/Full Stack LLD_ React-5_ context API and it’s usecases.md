@@ -1,26 +1,27 @@
-# Full Stack LLD: React-5: context API and it's usecases
+# Full Stack LLD: React-5: Context API and It's Use Cases
 
 ---
-title: Agenda of the lecture
+title: Agenda of the lecture  
 description: What will be covered in the topic?
 
 ---
 
 ## Agenda
+
 * Pagination Implementation
 * Prop Drilling
 * Context API
 * Add Context API to our Project
 * When to use Context API/REDUX
 
-
 ---
-title: Pagination Logic
+title: Pagination Logic  
 description: Implementing Pagination in the product's website
 
 ---
 
 ## Pagination
+
 * Let's implement pagination
 * Let's think of the logic
     * We have a button at the bottom of the page to change the page number
@@ -49,7 +50,9 @@ if (products == null) {
 
 const filteredSortedgroupByArr = basicOps(products, searchTerm, sortDir, currCategory, pageNum, pageSize);
 ```
+
 **basicOps.js**
+
 ```jsx
     /************************Pagination *********************/
     let sidx = (pageNum - 1) * pageSize;
@@ -60,16 +63,18 @@ const filteredSortedgroupByArr = basicOps(products, searchTerm, sortDir, currCat
 
     return { filteredSortedgroupByArr};
 ```
+
 Note - Implementation of Pagination UI is in the next lecture
 
 
 ---
-title: Pagination UI implementation
+title: Pagination UI implementation  
 description: Implementing Pagination
 
 ---
 
 ## Previous Lecture Brief
+
 * So far we have done searching, sorting, and categorization
 * let implemnt Pagination on UI
 * The number of items on a page should be 4.
@@ -80,21 +85,21 @@ description: Implementing Pagination
 
 We have to implement UI as well as Logic for this.
 
-
 ## Pagination
 
-
 ### styling for Pagination
+
 * We will be using Material UI icons for the next and previous pages.
 
-
 **Imports:**
+
 ```javascript
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 ```
 
 **Icons Code**
+
 ```javascript
 <div className = "pagination">
     <button
@@ -121,7 +126,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
     </button>
 </div>
 ```
+
 * We have added a few styles to these icons and these icons are button type.
+
 ```css
 .pagination {
   display: flex;
@@ -139,14 +146,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 ### Overflow and Underflow in Pagination
+
 * In such cases there is one edge case which is overflow and underflow.
 * If the page number is $== 1$ we will never press the previous button, this represents underflow. Thus, the previous button must be disabled.
 * If we have no more elements then the forward button should be disabled, this represents overflow.
 
 ### Pagination Logic
+
 * Firstly, onClick back button we want to decrease the page number, and forward button we want to increment the page number by 1.
 * total pages => elements/(elements_per_page)
 * Before Pagination, we can get a total number of pages by:
+
 ```javascript
 let totalPages = Math.ceil(filteredSortedgroupBy.length/ pageSize);
 ```
@@ -155,11 +165,13 @@ let totalPages = Math.ceil(filteredSortedgroupBy.length/ pageSize);
 * As we are returning two items from basicOps, we will be getting an object from there rather than an array so we will separate them.
 
 **page number and page size**
+
 ```javascript
  const { pageSize, pageNum,
         setPageNum,
         setPageSize } = usePaginationContext();
 ```
+
 **passing these to basicOps**
 
 ```javascript
@@ -167,6 +179,7 @@ const object = basicOps(products, searchTerm, sortDir, currCategory, pageNum, pa
 ```
 
 **basicOps**
+
 ```javascript
 let totalPages = Math.ceil(filteredSortedgroupByArr.length / pageSize);
     /************************Pagination *********************/
@@ -180,19 +193,19 @@ return { filteredSortedgroupByArr, totalPages };
 ```
 
 ---
-title: Prop Drilling
+title: Prop Drilling  
 description: Problems with pagination and prop drilling
 
 ---
 
-
 ### Setup for Understanding Prop Drilling
+
 * Let us we add Cart and User Components to the folder.
 * Add routes for these two components to the `Home.jsx`
 * Navigate to Navbar and add Links to Home, Users, and Cart.
 * Add styling to Navbar in App.css
 * Add minimal content in the Cart and Users
-*  Now go to Page 3 on the Home page and from there visit users and back to the home page.
+* Now go to Page 3 on the Home page and from there visit users and back to the home page.
 * Let us build a component tree for our Application
 
 **Cart.jsx**
@@ -210,6 +223,7 @@ export default Cart
 ```
 
 **User.jsx**
+
 ```javascript
 import React from 'react'
 
@@ -251,30 +265,30 @@ function NavBar() {
 export default NavBar
 ```
 
-
 ### Component tree for the App
-![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/057/012/original/upload_be375aac43be22e663e0f16167b918cd.png?1700132317)
 
+![App Component Tree](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/057/012/original/upload_be375aac43be22e663e0f16167b918cd.png?1700132317)
 
-### Case Study : Issue with Pagination 
+### Case Study : Issue with Pagination  
 
-[Ask to learners]
-**Que Let's say i go to page 3 and then  from home page to users  and return back what do you think happens ??**
+[Ask to learners]  
+**Q: Let's say i go to page 3, and then from home page to users, and return back. What do you think happens??**  
 Ans: when we come back pagination is again reset to page number 1  
 
-**Reason**
+**Reason**  
 ![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/057/014/original/upload_2812b17564fd227c8948c7a03fd84859.png?1700132466)
 * We have Route and when Route finds a match it removes the current page and adds another page.
 * So in our case when it finds users it removes home and when we come back home, the user's page is removed.
 * Here, the whole state is removed and it renders like it is rendering for the first time.
 * We return to Page 1 instead of Page 3. 
 
-
 [Ask the learners]
-**Que Is this a good user experience?**
+**Que Is this a good user experience?**  
+
 * It is not a good user experience.
 
 ### Solving the Issue -> State Uplifting?
+
 -> We can store pageState to the App and send this as a prop to the Home. 
 This is called Page Uplifting.
 
@@ -284,21 +298,24 @@ preserve the state.
 Solution: uplift the state to an ancestor which will not be re-rendered.
 
 ### Issue-1 with State Uplifting 
+
 Page Uplifting also has a problem. Here, if I visit for All Categories I have page number 3 but for individual categories, there are not more than 2. So if I go to some other category, it is still on Page 3 and I will have to go previous which is again not a good user experience.
 
 **Solution** For this particular issue what we can do is, whenever there is any change in the Home Page, at that time we can set the page number to 1. This is for any type of operation.
 
 ## Issue 2 : Prop Drilling
+
 * Now coming to the older problems, we are required to uplift the page number.
 * When we lift the state the problem that arises is the Prop Drilling 
 * **Prop Drilling** -> When the descendant needs a prop and the height of that component tree is huge then we have to pass props to the whole chain.
 * What can be the possible solution for this is to wrap the whole thing around the whole application and any of the elements should be able to access the state whenever they want.
 * This block that covers the entire application and must be able to serve all the components is called the context area.
-![](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/057/018/original/upload_b185c110b061fc7a92562faf57b9fe54.png?1700132603)
+![Pagination in an App](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/057/018/original/upload_b185c110b061fc7a92562faf57b9fe54.png?1700132603)
 * This is a three-step process
     * **Step 1:** create an context wrapper object using the method `createContext()`.
     * **Step 2:** Now use `<ContextWrapper.Provider>` tag to wrap all the components inside it.
     * **Step 3:** To save values, use a `value` prop and assign some value to it.
+
 ```jsx
 import React, { useContext } from 'react';
 // 1
@@ -339,6 +356,7 @@ function Children() {
 
 export default Context
 ```
+
 * Now wherever you want to pass these values you can wrap them around using the same variable and `.Provider`.
 * Now to derive value we use a method given by React `useContext(ContextWrapper)` to extract value.
 * What we are doing is we are wrapping the entire app inside a wrapper. To this wrapper, we are giving a message. With the help of the `useContext` method, we can extract the message from a child's note without sending it to the parent or grandparent.
@@ -346,13 +364,13 @@ export default Context
 * Its usecase is Theme -> Dark and Light Theme
 
 ---
-title: Theme Manager
+title: Theme Manager  
 description: An application of context provider is a theme manager
 
 ---
 
-
 ## Theme Manager
+
 * Add Creator, Article, Footer, and ThemeManager pages to the project.
 * We have two classes light and dark in the `themeManager.css` file.
 * The header needs the current theme variable. If it is `light` then a light theme is applied and if it is `dark` a dark theme is applied.
@@ -367,6 +385,7 @@ description: An application of context provider is a theme manager
 * Use the state variable in ThemeManager for the current theme. We can have a toggle button that changes the theme when clicked.
 
 **Header.jsx**
+
 ```jsx
 import "./themeManager.css";
 import { ThemeWrapper } from "./ThemeManger";
@@ -390,6 +409,7 @@ export default Header;
 ```
 
 **Footer.jsx**
+
 ```jsx
 import { useContext } from "react";
 import "./themeManager.css";
@@ -414,6 +434,7 @@ export default Footer;
 ```
 
 **Article**
+
 ```jsx
 import "./themeManager.css";
 function Article() {
@@ -428,6 +449,7 @@ export default Article;
 ```
 
 **ThemeManager.jsx**
+
 ```jsx
 import React, { useState } from 'react'
 import Header from './Header';
@@ -463,6 +485,7 @@ export default ThemeManger
 ```
 
 **themeManager.css**
+
 ```css
 .light {
     background-color: white;
@@ -484,24 +507,26 @@ description: Adding Context Provider to the project
 ## Adding Context to the Project
 
 ### Things to Think Around
+
 * Features
 * data 
 * State
 * UI
 
-1. Steps/ 
-   * Initial Data 
+1. Steps/
+   * Initial Data
         * Searching
         * Sorting
         * Categorization
         * Pagination
         * Render the Results
- 
-2. Data 
+
+2. Data
     * Products
     * Categories
 
 ### Pagination Context Provider
+
 * Create a new Component Pagination inside the context folder => `contexts/PaginationContext.jsx`.
 * Next inside this file export the default funtion `PaginationProvider()` that will return `PaginationContext.Provider`.
 * This takes `Children` as a prop and calls it between its tags.

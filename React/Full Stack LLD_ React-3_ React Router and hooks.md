@@ -52,7 +52,7 @@ description: Building an intuition for why we need useEffect
 
 ## Intuition of useEffect
 
-* Open YouTube open Inspect and go to the network, make it 3G slow and show the placeholder screen in Youtube.
+* Open YouTube, open Inspect and go to the network, make it 3G slow and show the placeholder screen in Youtube.
 ![Youtube placeholder screen](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/589/original/upload_ccd3037acdb7fec6ad9707d7ceeb9366.png?1699677149)
 * So initially this screen is rendered, in the mean time content is fetched from the API and UI is formed and displayed.
 
@@ -179,7 +179,7 @@ export default GetData
 ```
 
 ---
-title: 6 use-cases of useEffect
+title: 6 use-cases of useEffect  
 description: covering all the types of the useEffects
 
 ---
@@ -354,12 +354,12 @@ function UseEffectExamples() {
 ```
 
 ---
-title: useEffectCleanUp
+title: useEffect CleanUp  
 description: What is cleanup in useEffect and used in various types of useEffects?
 
 ---
 
-## useEffectCleanUp
+## useEffect CleanUp
 
 **[Ask the learners]**
 
@@ -520,14 +520,15 @@ export default UseEffectCleanup;
 
 **[Ask the learners]**
 
-`Q Why were we getting errors in the async function?`
-Ans:  to understand it first we will need to know what an async function returns so an async function returns a `promise` but useEffect needs `function` as a return value so it can use it as a cleanup function that's why we are getting this error 
+`Q Why were we getting errors in the async function?`  
+Ans:  to understand it, first we will need to know what an async function returns so an async function returns a `promise` but useEffect needs `function` as a return value so it can use it as a cleanup function that's why we are getting this error 
 
 ---
-title: Application of useEffect
+title: Application of useEffect  
 description: Explaining the use case of the useEffect with an example
 
 ---
+
 ## Resize aware component
 
 * Let us say we are building the resize-aware component that tracks the current resize values and just prints them.
@@ -535,7 +536,7 @@ description: Explaining the use case of the useEffect with an example
 * We want it only when the screen resizes
 * At that point in time we can add a dependency array and update the event listeners.
 
-```jsx=
+```jsx
 import React, { useState, useEffect } from 'react';
 
 const ResizeAwareComponent = () => {
@@ -576,10 +577,10 @@ description: The client Server requests a response in the form of React Bundles
 
 ---
 
-## Req res cycle for a react app
+## Req Res Cycle for a React App
 
 * Let us discuss the client server once again
-* The browser sends the request for the page `linkedin.com`. The server returns a `React Bundled file`.
+* The browser sends the request for the page `linkedin.com`. The server returns a `React Bundled file`.  
 **Note**  Show the live LinkedIn website and visit different parts of the website to show how it works or changes.  
 ![browser - LinkedIn server req-res exchange](https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/056/593/original/upload_07d2f2bf20afee593ee6172896d07768.png?1699678960)
 
@@ -592,7 +593,7 @@ description: The client Server requests a response in the form of React Bundles
 -> It should look like an app
 -> load time should be small
 * Let us say the browser is sending a request for the `Job` so it fetches the latest React bundle. But here exists a problem
-* When we request data from the backend there are always two components UI and data.
+* When we request data from the backend there are always two components: UI and data.
 * Initial Request for UI and Bundle: When the user accesses the application, the browser sends a request for the initial UI and a minimal bundle of the application.
 * Initial UI and Placeholder/Loader: The application loads an initial UI, which may include placeholders or loaders for various components that are not immediately visible. These placeholders help create a better user experience by giving the impression that the application is responsive.
 * User Interaction: When the user interacts with the application, such as clicking a button or navigating to a specific page, the application checks whether the necessary UI components for that action are already loaded.
@@ -672,7 +673,7 @@ function PageNotFound() {
 ```
 
 ---
-title: Link
+title: Link  
 description: Using the Link in React Router DOM
 
 ---
@@ -694,7 +695,7 @@ description: Using the Link in React Router DOM
             </nav>
 ```
 ---
-title: Template Routes
+title: Template Routes  
 description: How to do dynamic routing in React
 
 ---
@@ -728,7 +729,7 @@ function Users(props) {
 To understand it better let's take a real life use case:  
 
 * Fake Store API - we want to make a simple get request for the users.
-* Show demo to the learners how users and id returns the data in Fake Store API
+* Show demo to the learners how users and id returns the data in Fake Store API  
 **[Ask the learners]**
 If the route is given how are you going to get the data and represent it in this HTML?
 -> `useEffect` with an empty list
@@ -763,7 +764,7 @@ function Users(props) {
 * These are called template routes or dynamic routes. Everything written like `:abc` can be derived with the help of `params.abc`, where `let params = useParams()`.
 
 ---
-title: Redirecting Routes
+title: Redirecting Routes  
 description: Using the Navigate tag in Routes
 
 ---
@@ -780,7 +781,7 @@ description: Using the Navigate tag in Routes
 So in the above example if the user uses url `/abc` he/she will be redirected to the home page.
 
 ---
-title: Nested Routes
+title: Nested Routes  
 description: Using nested routes in the About section to navigate through the company and founders.
 
 ---
